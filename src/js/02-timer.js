@@ -33,20 +33,8 @@ function timer() {
     const targetDate = new Date(selectedData);
     let distanceToTarget = 0;
     
-    if (distanceToTarget < 0 ) {
-        clearInterval(timerId);
-        ref.startBtnEl.disabled = false;
-    } else {
-        timerMarkup(distanceToTarget)
-    }
-    
     if (timerId !== null) {
         clearInterval(timerId);
-        ref.startBtnEl.disabled = true;
-        ref.dataEl.textContent = '00';
-        ref.hoursEl.textContent = '00';
-        ref.minutesEl.textContent = '00';
-        ref.secondsEl.textContent = '00';
     } 
 
     timerId = setInterval(() => {
@@ -55,6 +43,11 @@ function timer() {
         distanceToTarget = targetDateInMs - currentDateInMs;
         console.log(convertMs(distanceToTarget));
         timerMarkup(distanceToTarget);
+
+        if (distanceToTarget <= 1000 ) {
+            clearInterval(timerId);
+            ref.startBtnEl.disabled = false;
+        } 
     }, 1000);
     
     ref.startBtnEl.disabled = true;
@@ -83,4 +76,5 @@ function convertMs(ms) {
     const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
     return { days, hours, minutes, seconds };
 }
+
 ref.startBtnEl.addEventListener('click', timer);
