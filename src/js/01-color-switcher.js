@@ -12,6 +12,7 @@ function changeColor() {
     timerId = setInterval(() => {
         ref.bodyEl.style.backgroundColor = getRandomHexColor();
     }, 1000);
+
 }
 ref.startBtn.addEventListener('click', changeColor)
 

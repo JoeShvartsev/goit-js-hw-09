@@ -15,19 +15,22 @@ const createPromise = (position, delay) => {
 };
 
 form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+  
+    const delay = parseInt(form.elements.delay.value);
+    const step = parseInt(form.elements.step.value);
+    const amount = parseInt(form.elements.amount.value);
 
-  const delay = parseInt(form.elements.delay.value);
-  const step = parseInt(form.elements.step.value);
-  const amount = parseInt(form.elements.amount.value);
-
-  for (let i = 0; i < amount; i++) {
-    const promiseDelay = i === 0 ? delay : delay + i * step;
-    try {
-      const result = await createPromise(i + 1, promiseDelay);
-      Notiflix.Notify.success(`✅ Fulfilled promise ${result.position} in ${result.delay}ms`);
-    } catch (error) {
-      Notiflix.Notify.failure(`❌ Rejected promise ${error.position} in ${error.delay}ms`);
+    for (let i = 0; i < amount; i++) {
+      const promiseDelay = i === 0 ? delay : delay + i * step;
+      createPromise(i + 1, promiseDelay)
+      .then(({ position, delay }) => {
+          Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+          Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+      });
     }
-  }
+    
+    form.reset();
 });
