@@ -4,17 +4,16 @@ const ref ={
     bodyEl: document.body
 
 }
-
+let timerId = null
 const changeColor = () => {
     ref.startBtn.disabled = true;
-    const timerId = setInterval(() => {
+    timerId = setInterval(() => {
         ref.bodyEl.style.backgroundColor = getRandomHexColor()
     }, 1000);
-    stopChangeColor(timerId)
     }
 ref.startBtn.addEventListener('click', changeColor)
 
-const stopChangeColor = (timerId) =>{
+const stopChangeColor = () =>{
     ref.startBtn.disabled = false;
         clearInterval(timerId);
     
