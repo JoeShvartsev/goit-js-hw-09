@@ -7,7 +7,7 @@ const ref ={
 
 const changeColor = () => {
     ref.startBtn.disabled = true;
-    timerId = setInterval(() => {
+    const timerId = setInterval(() => {
         ref.bodyEl.style.backgroundColor = getRandomHexColor()
     }, 1000);
     stopChangeColor(timerId)
