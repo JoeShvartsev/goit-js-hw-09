@@ -17,7 +17,7 @@ img {
   max-width: 100%;
 }
 
-button[data-start] {
+.timer-button {
   width: 100px;
   height: 37px;
   margin-left: 20px;
