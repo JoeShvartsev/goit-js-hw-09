@@ -15,9 +15,9 @@ ref.startBtn.addEventListener('click', changeColor)
 
 const stopChangeColor = () =>{
     ref.startBtn.disabled = false;
-    ref.stopBtn.addEventListener("click", () => {
+   
         clearInterval(timerId);
-    });
+    
 }
 ref.stopBtn.addEventListener('click', stopChangeColor)
 
