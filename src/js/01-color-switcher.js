@@ -5,16 +5,19 @@ const ref ={
 
 }
 let timerId = null
-const changeColor = () => {
+ref.stopBtn.disabled = true;
+function changeColor() {
     ref.startBtn.disabled = true;
+    ref.stopBtn.disabled = false;
     timerId = setInterval(() => {
-        ref.bodyEl.style.backgroundColor = getRandomHexColor()
+        ref.bodyEl.style.backgroundColor = getRandomHexColor();
     }, 1000);
-    }
+}
 ref.startBtn.addEventListener('click', changeColor)
 
 const stopChangeColor = () =>{
     ref.startBtn.disabled = false;
+    ref.stopBtn.disabled = true;
         clearInterval(timerId);
     
 }
